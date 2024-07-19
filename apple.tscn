@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://skm3bay632ct"]
+
+[ext_resource type="Script" path="res://StaticBody2D.gd" id="1_4p4es"]
+[ext_resource type="Texture2D" uid="uid://d2ko5kgyxp1y2" path="res://icon.svg" id="2_7cd2n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c4d1e"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w82sr"]
+radius = 6.0
+
+[node name="Apple" type="StaticBody2D"]
+script = ExtResource("1_4p4es")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c4d1e")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_7cd2n")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_w82sr")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

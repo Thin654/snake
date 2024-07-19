@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://h72bppv5jvj3"]
+
+[ext_resource type="PackedScene" uid="uid://ddlkbdn0mws6v" path="res://grid_container.tscn" id="1_lmnqu"]
+[ext_resource type="PackedScene" uid="uid://df7rlxsv6wp2s" path="res://character_body_2d.tscn" id="1_vnn78"]
+[ext_resource type="PackedScene" uid="uid://bewsc6rqwymh1" path="res://area_2d.tscn" id="2_ewsep"]
+[ext_resource type="PackedScene" uid="uid://mk2j5hegpxbx" path="res://area_borders.tscn" id="3_5u2pt"]
+[ext_resource type="PackedScene" uid="uid://skm3bay632ct" path="res://apple.tscn" id="5_mclbi"]
+
+[node name="Snake" type="Node2D"]
+
+[node name="GridContainer" parent="." instance=ExtResource("1_lmnqu")]
+
+[node name="Borders" parent="." instance=ExtResource("2_ewsep")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_vnn78")]
+position = Vector2(511, 133)
+scale = Vector2(2.5, 2.5)
+
+[node name="AreaBorders" parent="." instance=ExtResource("3_5u2pt")]
+
+[node name="Apple" parent="." instance=ExtResource("5_mclbi")]
+position = Vector2(79, 79)
+scale = Vector2(3, 3)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.128
+
+[connection signal="body_entered" from="AreaBorders" to="CharacterBody2D" method="_on_area_borders_body_entered"]
+[connection signal="timeout" from="Timer" to="CharacterBody2D" method="_on_timer_timeout"]
